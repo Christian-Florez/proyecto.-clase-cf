@@ -1,66 +1,244 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Presentación | Ingeniería de Sistemas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-## About Laravel
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --panel: #12172a;
+      --accent: #00e5ff;
+      --accent2: #7c8cff;
+      --text: #e6e8ff;
+      --muted: #9aa0c3;
+    }
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    body {
+      background:
+        radial-gradient(circle at top left, #121a3a, transparent),
+        radial-gradient(circle at bottom right, #081028, transparent),
+        var(--bg);
+      color: var(--text);
+      overflow: hidden;
+    }
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    .slides {
+      display: flex;
+      width: 400vw;
+      height: 100vh;
+      transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
 
-## Learning Laravel
+    section {
+      width: 100vw;
+      padding: 80px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    /* HERO */
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    .hero span {
+      color: var(--accent);
+    }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.6;
+    }
 
-## Laravel Sponsors
+    /* FOTO */
+    .photo {
+      width: 300px;
+      height: 380px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0ff, #7c8cff);
+      padding: 2px;
+    }
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    .photo div {
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--panel);
+    }
 
-### Premium Partners
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%);
+    }
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+    /* INFO BLOCKS */
+    .blocks {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      margin-top: 20px;
+    }
 
-## Contributing
+    .block {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    .block h3 {
+      font-size: 1rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
 
-## Code of Conduct
+    .block p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    /* CENTER */
+    .center {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
 
-## Security Vulnerabilities
+    .center h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    .indicator {
+      position: fixed;
+      bottom: 30px;
+      right: 40px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
 
-## License
+    @media (max-width: 900px) {
+      section {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+      .photo {
+        margin: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="slides" id="slides">
+
+  <!-- SLIDE 1 -->
+  <section class="hero">
+    <div>
+      <h1>Hola, soy <span>Christian Florez</span></h1>
+      <p>
+        Estudiante de <strong>Ingeniería de Sistemas</strong>,
+        enfocado en programación, lógica computacional
+        y desarrollo de soluciones eficientes.
+      </p>
+    </div>
+
+    <div class="photo">
+      <div>
+       <img src="img/cf.jpg" alt="Foto de presentación" />
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section>
+    <div>
+      <h2>Perfil Técnico</h2>
+      <p class="muted">
+        Formación orientada al análisis, diseño e implementación
+        de sistemas informáticos.
+      </p>
+
+      <div class="blocks">
+        <div class="block">
+          <h3>Lenguajes</h3>
+          <p>Java, Python, C++, JavaScript</p>
+        </div>
+        <div class="block">
+          <h3>Fundamentos</h3>
+          <p>Algoritmos, estructuras de datos, POO</p>
+        </div>
+        <div class="block">
+          <h3>Sistemas</h3>
+          <p>Bases de datos, sistemas operativos</p>
+        </div>
+        <div class="block">
+          <h3>Metodología</h3>
+          <p>Análisis, diseño y documentación</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section class="center">
+    <h2>Objetivo Profesional</h2>
+    <p>
+      Desarrollar software de calidad, optimizar procesos
+      y crecer como ingeniero aportando soluciones tecnológicas.
+    </p>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section class="center">
+    <h2>Gracias</h2>
+    <p>¿Preguntas?</p>
+  </section>
+
+</div>
+
+<div class="indicator" id="indicator">1 / 4</div>
+
+<script>
+  let index = 0;
+  const slides = document.getElementById("slides");
+  const indicator = document.getElementById("indicator");
+  const total = 4;
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" && index < total - 1) index++;
+    if (e.key === "ArrowLeft" && index > 0) index--;
+
+    slides.style.transform = `translateX(-${index * 100}vw)`;
+    indicator.textContent = `${index + 1} / ${total}`;
+  });
+</script>
+
+</body>
+</html>
