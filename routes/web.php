@@ -19,9 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', Homecontroller::class);
-Route::get('/product', [productController::class, 'index']);
-Route::get('/product/create',[productController::class, 'create']);
-Route::get('/product/{id}/{categoria?}', [productController::class, 'show']);
+
+Route::prefix("/product")->controller(function () {
+    Route::get('/index', "index");
+    Route::get('/create', "create");
+    Route::get('/{id}/{categoria?}',"show");
+});
+
+
 
 
 
