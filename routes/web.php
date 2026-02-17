@@ -21,7 +21,7 @@ Route::get('/', function () {
 Route::get('/home', Homecontroller::class);
 
 Route::prefix("/product")->controller(function () {
-    Route::get('/index', "index");
+    Route::get('/index', );
     Route::get('/create', "create");
     Route::get('/{id}/{categoria?}',"show");
 });
