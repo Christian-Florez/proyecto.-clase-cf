@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+nombre
+price
+marca
+descripcion
+
 
 </body>
 </html>
