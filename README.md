@@ -5,66 +5,7 @@
   <title>README - Presentación Personal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      padding: 40px;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #ffffff;
-      color: #111;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-    }
-
-    h1 {
-      font-size: 2.4rem;
-      border-bottom: 2px solid #000;
-      padding-bottom: 5px;
-    }
-
-    h2 {
-      margin-top: 30px;
-      font-size: 1.6rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-    }
-
-    ul {
-      margin-left: 20px;
-    }
-
-    li {
-      font-size: 1.05rem;
-    }
-
-    code {
-      background-color: #f2f2f2;
-      padding: 3px 6px;
-      border-radius: 4px;
-      font-size: 0.95rem;
-    }
-
-    pre {
-      background-color: #f2f2f2;
-      padding: 15px;
-      border-radius: 6px;
-      overflow-x: auto;
-      font-size: 0.95rem;
-    }
-
-    footer {
-      margin-top: 40px;
-      border-top: 1px solid #ccc;
-      padding-top: 15px;
-      font-size: 0.95rem;
-    }
-  </style>
+  
 </head>
 
 <body>
