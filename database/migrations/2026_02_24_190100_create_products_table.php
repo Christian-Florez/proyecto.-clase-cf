@@ -22,11 +22,6 @@ return new class extends Migration
             $table->decimal('price', 10, 2)->default(0);
             $table->integer('stock')->default(0);
             $table->timestamps();
-
-
-            //crear un llave foranea
-            $table->unsignedBigInteger("category_id");
-            $table->foreign("category_id")->references("id")->on("categories");
         });
     }
 
