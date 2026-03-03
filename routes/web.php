@@ -25,13 +25,21 @@ Route::get('/', function () {
 Route::get('/home', HomeController::class);
 
 Route::prefix("/product")->controller(ProductController::class)->group(function () {
-    Route::get('/index', "index");
+    Route::get('/index', "index")->name('product.index');
     Route::get('/create', "create");
     Route::get('/{id}/{categoria?}', "show");
 });
 
-// Ruta adicional con typo para compatibilidad: /prodcut
+// Rutas adicionales con typo para compatibilidad
 Route::get('/prodcut', [ProductController::class, 'index']);
+Route::get('/prodcut/create', [ProductController::class, 'create']);
+
+// store routes (product form submission)
+Route::post('/product', [ProductController::class, 'store']);
+Route::post('/product/store', [ProductController::class, 'store']);
+// typo variants
+Route::post('/prodcut', [ProductController::class, 'store']);
+Route::post('/prodcut/store', [ProductController::class, 'store']);
 
 
 
