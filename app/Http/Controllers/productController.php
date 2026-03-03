@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product;
 use Illuminate\Http\Request;
 
-class productController extends Controller
+class ProductController extends Controller
 {
     public function index()
     {
-        return view('product.index');
+        $producttList = product::all();
+        return view('product.index',[
+            "productList" => $producttList
+        ]);
     }
 
     public function create()
@@ -23,9 +27,5 @@ class productController extends Controller
             return "producto: $id categoria $categoria";
         }
     }
-
-
-
-
 
 }

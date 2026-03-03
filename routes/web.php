@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Homecontroller;
-use App\Http\Controllers\productController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +18,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', Homecontroller::class);
 
-Route::prefix("/product")->controller(function () {
-    Route::get('/index', );
+
+
+
+Route::get('/home', HomeController::class);
+
+Route::prefix("/product")->controller(ProductController::class)->group(function () {
+    Route::get('/index', "index");
     Route::get('/create', "create");
-    Route::get('/{id}/{categoria?}',"show");
+    Route::get('/{id}/{categoria?}', "show");
 });
+
+// Ruta adicional con typo para compatibilidad: /prodcut
+Route::get('/prodcut', [ProductController::class, 'index']);
 
 
 
