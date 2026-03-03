@@ -162,6 +162,43 @@
             color: #0369a1;
         }
 
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px 14px;
+            background-color: var(--light-bg);
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .file-input-wrapper input[type="file"]:focus + .file-input-label,
+        .file-input-wrapper:hover .file-input-label {
+            border-color: var(--primary);
+            background-color: rgba(37, 99, 235, 0.05);
+            color: var(--primary);
+        }
+
+        .file-name {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
         @media (max-width: 480px) {
             .header {
                 padding: 30px 20px;
@@ -192,7 +229,7 @@
                 📋 Completa todos los campos marcados con <span class="required">*</span> para crear el producto
             </div>
 
-            <form method="POST" action="{{ url('/prodcut/store') }}">
+            <form method="POST" action="{{ url('/prodcut/store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
@@ -228,6 +265,22 @@
                     <label>Descripción <span class="required">*</span></label>
                     <textarea name="descripcion" placeholder="Describe los principales features y características del producto..." required></textarea>
                 </div>
+
+                <div class="form-group">
+                    <label>Imagen del Producto <span class="required">*</span></label>
+                    <div class="file-input-wrapper">
+                        <input type="file" name="image" id="image" accept="image/*" required>
+                        <label for="image" class="file-input-label">📷 Seleccionar imagen (JPG, PNG, GIF)</label>
+                    </div>
+                    <div class="file-name" id="fileName"></div>
+                </div>
+
+                <script>
+                    document.getElementById('image').addEventListener('change', function(e) {
+                        const fileName = e.target.files[0]?.name || '';
+                        document.getElementById('fileName').textContent = fileName ? '✓ ' + fileName : '';
+                    });
+                </script>
 
                 <button type="submit" class="btn-submit">💾 Guardar Producto</button>
             </form>

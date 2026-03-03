@@ -44,10 +44,8 @@ class ProductController extends Controller
             'descripcion' => 'nullable|string',
             'category_id' => 'nullable|exists:categories,id',
             'stock' => 'nullable|integer|min:0',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-
-
 
         $product = new product();
         $product->name = $data['nombre'];
@@ -55,7 +53,16 @@ class ProductController extends Controller
         $product->description = $data['descripcion'] ?? null;
         $product->price = $data['price'];
         $product->stock = $data['stock'] ?? 0;
-        $product->category_id = $data['category_id'] ?? 1; // default to first category
+        $product->category_id = $data['category_id'] ?? 1;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $ruta = $request->file('image')->store('productos', 'public');
+            $product->image = $ruta;
+        } else {
+            $product->image = null;
+        }
+
         $product->save();
 
         return redirect('/product/index')->with('success', 'Producto creado correctamente');
