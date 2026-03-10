@@ -322,7 +322,9 @@
 
         @forelse($items as $prod)
             <article class="card">
-                <div class="media" style="background-image:url('{{ $prod->image ?? ($prod->image_url ?? 'https://via.placeholder.com/600x400?text=PC') }}')" role="img" aria-label="Imagen de {{ $prod->name }}"></div>
+                <div class="media"
+                     style="background-image:url('{{ $prod->image ? asset('storage/'.$prod->image) : ($prod->image_url ?? 'https://via.placeholder.com/600x400?text=PC') }}')"
+                     role="img" aria-label="Imagen de {{ $prod->name }}"></div>
                 <div class="body">
                     <h2 class="title">{{ $prod->name ?? $prod->nombre ?? 'Producto' }}</h2>
                     <div class="desc">{{ $prod->description ?? $prod->descripcion ?? 'Descripción breve del producto.' }}</div>

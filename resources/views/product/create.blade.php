@@ -199,6 +199,16 @@
             margin-top: 6px;
         }
 
+        .error-message {
+            background-color: #fee;
+            border-left: 4px solid var(--danger);
+            padding: 12px 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            color: #991b1b;
+        }
+
         @media (max-width: 480px) {
             .header {
                 padding: 30px 20px;
@@ -225,33 +235,31 @@
         </div>
 
         <div class="form-container">
-            <div class="form-info">
-                📋 Completa todos los campos marcados con <span class="required">*</span> para crear el producto
-            </div>
+            <div id="errorMessage" class="error-message" style="display:none;"></div>
 
-            <form method="POST" action="{{ url('/prodcut/store') }}" enctype="multipart/form-data">
+            <form id="productForm" method="POST" action="{{ url('/prodcut/store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
-                    <label>Nombre del Producto <span class="required">*</span></label>
-                    <input type="text" name="nombre" placeholder="Ej: Laptop Gaming Pro" required>
+                    <label>Nombre del Producto</label>
+                    <input type="text" name="nombre" placeholder="Ej: Laptop Gaming Pro">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Precio <span class="required">*</span></label>
-                        <input type="number" name="price" step="0.01" placeholder="1299.99" required>
+                        <label>Precio</label>
+                        <input type="number" name="price" step="0.01" placeholder="1299.99">
                     </div>
 
                     <div class="form-group">
-                        <label>Stock <span class="required">*</span></label>
-                        <input type="number" name="stock" min="0" placeholder="0" value="0" required>
+                        <label>Stock</label>
+                        <input type="number" name="stock" min="0" placeholder="0" value="0">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Categoría <span class="required">*</span></label>
-                    <select name="category_id" required>
+                    <label>Categoría</label>
+                    <select name="category_id">
                         <option value="">-- Selecciona una categoría --</option>
                         @forelse($categories ?? [] as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -262,23 +270,61 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Descripción <span class="required">*</span></label>
-                    <textarea name="descripcion" placeholder="Describe los principales features y características del producto..." required></textarea>
+                    <label>Descripción</label>
+                    <textarea name="descripcion" placeholder="Describe los principales features y características del producto..."></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Imagen del Producto <span class="required">*</span></label>
+                    <label>Imagen del Producto</label>
                     <div class="file-input-wrapper">
-                        <input type="file" name="image" id="image" accept="image/*" required>
+                        <input type="file" name="image" id="image" accept="image/*">
                         <label for="image" class="file-input-label">📷 Seleccionar imagen (JPG, PNG, GIF)</label>
                     </div>
                     <div class="file-name" id="fileName"></div>
+                    <!-- preview area -->
+                    <div id="imagePreview" class="image-preview"></div>
                 </div>
 
                 <script>
                     document.getElementById('image').addEventListener('change', function(e) {
                         const fileName = e.target.files[0]?.name || '';
                         document.getElementById('fileName').textContent = fileName ? '✓ ' + fileName : '';
+
+                        const preview = document.getElementById('imagePreview');
+                        if (this.files && this.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = function(evt) {
+                                preview.innerHTML = '<img src="' + evt.target.result + '" alt="Previsualización" style="max-width:100%;margin-top:10px;border-radius:8px;">';
+                            };
+                            reader.readAsDataURL(this.files[0]);
+                        } else {
+                            preview.innerHTML = '';
+                        }
+                    });
+
+                    document.getElementById('productForm').addEventListener('submit', function(e) {
+                        const nombre = document.querySelector('input[name="nombre"]').value.trim();
+                        const precio = document.querySelector('input[name="price"]').value.trim();
+                        const categoria = document.querySelector('select[name="category_id"]').value.trim();
+                        const descripcion = document.querySelector('textarea[name="descripcion"]').value.trim();
+                        const imagen = document.getElementById('image').files.length;
+                        const errorDiv = document.getElementById('errorMessage');
+
+                        let errores = [];
+                        if (!nombre) errores.push('El nombre del producto es requerido');
+                        if (!precio) errores.push('El precio es requerido');
+                        if (!categoria) errores.push('Debes seleccionar una categoria');
+                        if (!descripcion) errores.push('La descripcion es requerida');
+                        if (imagen === 0) errores.push('Debes seleccionar una imagen');
+
+                        if (errores.length > 0) {
+                            e.preventDefault();
+                            errorDiv.innerHTML = '❌ ' + errores.join('<br>❌ ');
+                            errorDiv.style.display = 'block';
+                            window.scrollTo(0, 0);
+                        } else {
+                            errorDiv.style.display = 'none';
+                        }
                     });
                 </script>
 
