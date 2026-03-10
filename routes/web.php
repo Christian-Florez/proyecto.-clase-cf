@@ -28,6 +28,7 @@ Route::prefix("/product")->controller(ProductController::class)->group(function 
     Route::get('/index', "index")->name('product.index');
     Route::get('/create', "create");
     Route::get('/{id}/{categoria?}', "show");
+    Route::delete('/{id}', "destroy")->name('product.destroy');
 });
 
 // Rutas adicionales con typo para compatibilidad

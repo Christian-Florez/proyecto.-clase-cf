@@ -223,10 +223,21 @@
             border: 2px solid var(--primary);
         }
 
-        .btn:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-            transform: scale(1.05);
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            border-color: #dc2626;
         }
 
         footer {
@@ -292,6 +303,66 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Estilos para paginación */
+        .pagination-container {
+            margin: 40px 0;
+        }
+
+        .pagination-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .pagination-previous,
+        .pagination-next {
+            flex: 0 0 auto;
+        }
+
+        .pagination-numbers {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .page-link {
+            display: inline-block;
+            padding: 10px 14px;
+            background: #ffffff;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        }
+
+        .page-link:hover:not(.disabled) {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .page-link.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .pagination-previous .page-link,
+        .pagination-next .page-link {
+            padding: 12px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            min-width: 120px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -333,7 +404,14 @@
                             <div class="price">€{{ number_format((float)($prod->price ?? 0), 2) }}</div>
                             <div class="meta">✓ En stock • Envío 24-48h</div>
                         </div>
-                        <a class="btn" href="{{ url('/product/'.$prod->id) }}">Ver</a>
+                        <div class="action-buttons">
+                            <a class="btn" href="{{ url('/product/'.$prod->id) }}">Ver</a>
+                            <form method="POST" action="{{ route('product.destroy', $prod->id) }}" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-delete">🗑️ Eliminar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </article>
@@ -345,6 +423,11 @@
         @endforelse
 
     </section>
+
+    <!-- Paginación -->
+    <div class="pagination-container" style="text-align: center; margin: 40px 0;">
+        {{ $productList->links() }}
+    </div>
 
     <footer>
         © {{ date('Y') }} Tienda de Computadoras — Plataforma profesional de venta online

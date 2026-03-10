@@ -10,9 +10,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $producttList = product::all();
+        $productList = product::paginate(9);
         return view('product.index',[
-            "productList" => $producttList
+            "productList" => $productList
         ]);
     }
 
@@ -66,6 +66,17 @@ class ProductController extends Controller
         $product->save();
 
         return redirect('/product/index')->with('success', 'Producto creado correctamente');
+    }
+
+    /**
+     * Remove the specified product from storage.
+     */
+    public function destroy($id)
+    {
+        $product = product::findOrFail($id);
+        $product->delete();
+
+        return redirect('/product/index')->with('success', 'Producto eliminado correctamente');
     }
 
 }
