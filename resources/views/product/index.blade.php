@@ -406,6 +406,10 @@
                         </div>
                         <div class="action-buttons">
                             <a class="btn" href="{{ url('/product/'.$prod->id) }}">Ver</a>
+                            <form method="POST" action="{{ route('cart.add', $prod->id) }}" style="display:inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success">Agregar al carrito</button>
+                            </form>
                             <form method="POST" action="{{ route('product.destroy', $prod->id) }}" style="display:inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?')">
                                 @csrf
                                 @method('DELETE')

@@ -25,11 +25,10 @@ class ProductController extends Controller
     }
     public function show($id, $categoria = null)
     {
-        if ($categoria == null) {
-            return "producto: $id";
-        } else {
-            return "producto: $id categoria $categoria";
-        }
+        $product = product::with('category')->findOrFail($id);
+        return view('product.show', [
+            'product' => $product
+        ]);
     }
 
     /**

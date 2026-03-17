@@ -1,3 +1,24 @@
+use App\Http\Controllers\CartController;
+
+// Rutas para el carrito de compras
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{productId}', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+});
+use App\Http\Controllers\CategoryController;
+
+// CRUD de categorías en /admin/categorias y /categories
+Route::prefix('admin')->group(function () {
+    Route::resource('categorias', CategoryController::class)->names('category');
+});
+Route::resource('categories', CategoryController::class)->names('category');
+
+// Ruta para el panel de administración
+Route::get('/admin', function () {
+    return view('admin');
+});
 <?php
 
 use App\Http\Controllers\HomeController;
@@ -16,7 +37,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 
